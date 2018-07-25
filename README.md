@@ -7,6 +7,12 @@ Spring MVC based RESTful API application which allows you to search flights base
 
 ## Development
 
+Update MySql username and password below -
+
+https://github.com/nrawat/flightSearch/blob/d14198ec0078cc9050681b62cc30b84c75cdfd1d/src/main/resources/com/xyz/dao/dao-context.xml#L16
+https://github.com/nrawat/flightSearch/blob/d14198ec0078cc9050681b62cc30b84c75cdfd1d/src/main/resources/com/xyz/dao/dao-context.xml#L17
+
+
 ### Build war archive
 
 mvn clean package
