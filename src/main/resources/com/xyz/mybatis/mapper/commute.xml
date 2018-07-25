@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Commute">
+      
+    <resultMap id="flightResult" type="Flight">
+        <result property="flightId" column="FlightId"/>
+
+        <association property="airline" column="{fieldValueId=AirLine}" javaType="ReferenceFieldValue" select="Refdata.getRFVByFieldValueId"/>
+    </resultMap>
+
+    <resultMap id="routeResult" type="Route">
+        <result property="routeId" column="RouteId"/>
+
+        <association property="fromCity" column="{fieldValueId=FromCity}" javaType="ReferenceFieldValue" select="Refdata.getRFVByFieldValueId"/>
+        <association property="toCity" column="{fieldValueId=ToCity}" javaType="ReferenceFieldValue" select="Refdata.getRFVByFieldValueId"/>
+    </resultMap>
+ 
+    <resultMap id="commuteResult" type="Commute">
+    	<result property="commuteId" column="CommuteId"/>
+        <result property="departureTime" column="DepartureTime"/>
+        <result property="arrivalTime" column="ArrivalTime"/>
+        <result property="price" column="Price"/>
+
+		<association property="route" column="{routeId=RouteId}" javaType="Route" select="selectRoutes"/>
+		<association property="flight" column="{flightId=FlightId}" javaType="Flight" select="selectFlights"/>
+    </resultMap>
+
+	<resultMap id="cityCommuteMapResult" type="HashMap">
+		<result property="key" column="FromCity" javaType="Integer" />
+		<collection property="value" javaType="List" ofType="Commute" resultMap="commuteResult"/>
+	</resultMap>
+    
+    <select id="selectFlights" resultMap="flightResult">
+        SELECT * FROM Flight
+        WHERE 1 = 1
+        <if test="flightId != null">
+        	AND FlightId = #{flightId}
+        </if>
+        ORDER BY FlightId
+    </select>
+
+    <select id="selectRoutes" resultMap="routeResult">
+        SELECT * FROM Route
+        WHERE 1 = 1
+        <if test="routeId != null">
+        	AND RouteId = #{routeId}
+        </if>
+        ORDER BY RouteId
+    </select>
+
+	<select id="selectCityCommutes" parameterType="Map" resultMap="cityCommuteMapResult">
+        SELECT * FROM Commute ct
+        JOIN Route rt ON ct.RouteId = rt.RouteId
+        JOIN Flight fl ON ct.FlightId = fl.FlightId
+        WHERE DepartureTime >= #{searchDate}
+        AND ArrivalTime &lt; DATE_ADD(#{searchDate}, INTERVAL 1 DAY)
+        <if test="airline != null">
+        	AND fl.airline = #{airline}
+        </if>
+    </select>
+
+    <insert id="insertFlight" parameterType="Flight" keyProperty="flightId">
+        INSERT INTO Flight (FlightId, Airline) VALUES (#{flightId}, #{airline.fieldValueId});
+    </insert>
+
+    <delete id="deleteFlight" parameterType="String">
+        DELETE FROM Flight WHERE FlightId = #{flightId}
+    </delete>
+    
+    <insert id="insertRoute" parameterType="Route" keyProperty="routeId">
+        INSERT INTO Route (FromCity, ToCity) VALUES (#{fromCity.fieldValueId}, #{toCity.fieldValueId});
+    </insert>
+
+    <delete id="deleteRoute" parameterType="int">
+        DELETE FROM Route WHERE RouteId = #{routeId}
+    </delete>
+ 
+<!--     <update id="update" parameterType="Flight"> -->
+<!--         UPDATE Flight -->
+<!--         SET Name = #{name} -->
+<!--         WHERE FlightId = #{flightId}  -->
+<!--     </update> -->
+</mapper>

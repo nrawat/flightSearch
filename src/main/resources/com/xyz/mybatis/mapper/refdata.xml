@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Refdata">
+
+	<resultMap id="referenceFieldResult" type="ReferenceField">
+		<result property="fieldId" column="FieldId"/>
+		<result property="fieldName" column="FieldName"/>
+	</resultMap>
+	
+	<resultMap id="referenceFieldValueResult" type="ReferenceFieldValue">
+		<result property="fieldValueId" column="FieldValueId"/>
+		<result property="fieldValueName" column="FieldValueName"/>
+		<result property="referenceField.fieldId" column="FieldId"/>
+		<result property="referenceField.fieldName" column="FieldName"/>
+	</resultMap>
+
+	<select id="getReferenceFields" resultMap="referenceFieldResult">
+		SELECT FieldId, FieldName
+		FROM ReferenceField
+		ORDER BY FieldName
+	</select>
+
+	<select id="getRFVByFieldId" resultMap="referenceFieldValueResult">
+		SELECT rfv.FieldValueId, rfv.FieldValueName, rf.FieldId, rf.FieldName
+		FROM ReferenceFieldValue rfv
+		JOIN ReferenceField rf ON rf.FieldId = rfv.FieldId
+		WHERE rf.FieldId = #{fieldId}
+		ORDER BY rfv.FieldValueName
+	</select>
+
+    <select id="getRFVByFieldValueId" resultMap="referenceFieldValueResult">
+		SELECT rfv.FieldValueId, rfv.FieldValueName, rf.FieldId, rf.FieldName
+		FROM ReferenceFieldValue rfv
+		JOIN ReferenceField rf ON rf.FieldId = rfv.FieldId
+		WHERE rfv.FieldValueId = #{fieldValueId}
+		ORDER BY rfv.FieldValueName
+	</select>
+
+    <insert id="insertRFV" parameterType="ReferenceFieldValue" useGeneratedKeys="true" keyProperty="fieldValueId">
+        INSERT INTO ReferenceFieldValue (FieldId, FieldValueName) VALUES (#{referenceField.fieldId}, #{fieldValueName});
+    </insert>
+
+    <delete id="deleteRFV" parameterType="int">
+        DELETE FROM ReferenceFieldValue WHERE FieldValueId = #{fieldValueId}
+    </delete>
+</mapper>

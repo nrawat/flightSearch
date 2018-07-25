@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration>
+    <typeAliases>
+        <typeAlias alias="Flight" type="com.xyz.model.Flight"/>
+        <typeAlias alias="Route" type="com.xyz.model.Route"/>
+        <typeAlias alias="Commute" type="com.xyz.model.Commute"/>
+        <typeAlias alias="ReferenceField" type="com.xyz.model.ReferenceField"/>
+        <typeAlias alias="ReferenceFieldValue" type="com.xyz.model.ReferenceFieldValue"/>
+    </typeAliases>
+
+    <mappers>
+       <mapper resource="com/xyz/mybatis/mapper/commute.xml"/>
+       <mapper resource="com/xyz/mybatis/mapper/refdata.xml"/>
+    </mappers>
+</configuration>
