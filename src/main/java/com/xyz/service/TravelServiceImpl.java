@@ -219,7 +219,7 @@ public class TravelServiceImpl implements TravelService {
 				filter.setPrice(Double.parseDouble(oneWayPrice));
 			}
 			catch(Exception e) {
-				throw new Exception("Invalid Price " + oneWayPrice, e);
+				throw new Exception("Invalid price " + oneWayPrice, e);
 			}
 		}
 

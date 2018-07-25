@@ -10,8 +10,8 @@ public class Commute {
 	private Route route;
 	private Flight flight;
 	private Date departureTime;
-    private Date arrivalTime;
-    private double price;
+	private Date arrivalTime;
+	private double price;
 
 	@Override
 	public int hashCode() {
