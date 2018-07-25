@@ -66,10 +66,8 @@ public class TravelController {
 		travelService.addRoute(fromCity, toCity);
 	}
 
-	@RequestMapping(value = "/route/delete", method = RequestMethod.DELETE)
-	public void deleteRoute(
-			@RequestParam(value = "fromCity", required = true) String fromCity,
-			@RequestParam(value = "toCity", required = true) String toCity) throws Exception {
+	@RequestMapping(value = "/route/delete", method = RequestMethod.POST)
+	public void deleteRoute(String fromCity, String toCity) throws Exception {
 		travelService.deleteRoute(fromCity, toCity);
 	}
 }
