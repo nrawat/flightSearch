@@ -23,24 +23,20 @@ Open <http://localhost:8080/XYZTravels/>
 ###Get cache data
 
 curl -i -X GET http://localhost:8080/XYZTravels/cities
-http://localhost:8080/XYZTravels/cities
 
 ["Bangalore","Hyderabad","Mumbai","New Delhi"]
 
 
 curl -i -X GET http://localhost:8080/XYZTravels/airlines
-http://localhost:8080/XYZTravels/airlines
 
 ["Air India","Indigo","SpiceJet","Vistara"]
 
 
 curl -i -X GET http://localhost:8080/XYZTravels/flights
-http://localhost:8080/XYZTravels/flights
 
 [{"flightId":"AIR001","airline":{"value":"Air India"}},{"flightId":"IND003","airline":{"value":"Indigo"}},{"flightId":"VIS001","airline":{"value":"Vistara"}},{"flightId":"AIR002","airline":{"value":"Air India"}},{"flightId":"IND001","airline":{"value":"Indigo"}},{"flightId":"SPI001","airline":{"value":"SpiceJet"}},{"flightId":"IND002","airline":{"value":"Indigo"}}]
 
 curl -i -X GET http://localhost:8080/XYZTravels/routes
-http://localhost:8080/XYZTravels/routes
 
 [{"fromCity":{"value":"New Delhi"},"toCity":{"value":"Hyderabad"}},{"fromCity":{"value":"Bangalore"},"toCity":{"value":"Hyderabad"}},{"fromCity":{"value":"Bangalore"},"toCity":{"value":"Mumbai"}},{"fromCity":{"value":"New Delhi"},"toCity":{"value":"Mumbai"}},{"fromCity":{"value":"Mumbai"},"toCity":{"value":"New Delhi"}},{"fromCity":{"value":"New Delhi"},"toCity":{"value":"Bangalore"}},{"fromCity":{"value":"Mumbai"},"toCity":{"value":"Bangalore"}},{"fromCity":{"value":"Hyderabad"},"toCity":{"value":"Mumbai"}},{"fromCity":{"value":"Bangalore"},"toCity":{"value":"New Delhi"}}]
 
@@ -75,7 +71,7 @@ curl -i -X DELETE http://localhost:8080/XYZTravels/city/delete?city=Chennai
 -   oneWayPrice - price for each side
 -   airline - specific airline 
 
-Returns all flights combination of forward and return flights and also shows journey time, number of stops, price and commutes.
+Returns all combination of forward and return flights and also shows journey time, number of stops, price and commutes.
 
 ###One way flight search 
 http://localhost:8080/XYZTravels/searchFlights?fromCity=Hyderabad&toCity=New%20Delhi&departureDate=20180725&oneWayPrice=7200
