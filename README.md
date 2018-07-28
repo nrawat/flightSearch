@@ -2,9 +2,7 @@
 
 Spring MVC based RESTful API application which allows you to search flights based on criteria like From City, To City, Departure Date, Return Date, Price and Airline. It will provide you information like Duration, Number of Stops, Total Price & Commute for the search criteria.
 
-Spring MVC
-MyBatis
-MySql
+Spring MVC <-> MyBatis <-> MySql
 
 
 ## Development
