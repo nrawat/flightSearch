@@ -2,7 +2,9 @@
 
 Spring MVC based RESTful API application which allows you to search flights based on criteria like From City, To City, Departure Date, Return Date, Price and Airline. It will provide you information like Duration, Number of Stops, Total Price & Commute for the search criteria.
 
-###Spring MVC ###MyBatis ###MySql
+### Spring MVC
+### MyBatis
+### MySql
 
 
 ## Development
@@ -24,9 +26,9 @@ execute schema.sql and data.sql present in scripts folder in MySql server
 Open <http://localhost:8080/XYZTravels/>
 
 
-##API
+## API
 
-###Get cache data
+### Get cache data
 
 curl -i -X GET http://localhost:8080/XYZTravels/cities
 
@@ -47,7 +49,7 @@ curl -i -X GET http://localhost:8080/XYZTravels/routes
 [{"fromCity":{"value":"New Delhi"},"toCity":{"value":"Hyderabad"}},{"fromCity":{"value":"Bangalore"},"toCity":{"value":"Hyderabad"}},{"fromCity":{"value":"Bangalore"},"toCity":{"value":"Mumbai"}},{"fromCity":{"value":"New Delhi"},"toCity":{"value":"Mumbai"}},{"fromCity":{"value":"Mumbai"},"toCity":{"value":"New Delhi"}},{"fromCity":{"value":"New Delhi"},"toCity":{"value":"Bangalore"}},{"fromCity":{"value":"Mumbai"},"toCity":{"value":"Bangalore"}},{"fromCity":{"value":"Hyderabad"},"toCity":{"value":"Mumbai"}},{"fromCity":{"value":"Bangalore"},"toCity":{"value":"New Delhi"}}]
 
 
-###POST cache data
+### POST cache data
 
 curl -d "city=Chennai" http://localhost:8080/XYZTravels/city/add
 
@@ -60,7 +62,7 @@ curl -d "fromCity=Hyderabad&toCity=Chennai" http://localhost:8080/XYZTravels/rou
 curl -d "fromCity=Hyderabad&toCity=Chennai" http://localhost:8080/XYZTravels/route/delete
 
 
-###DELETE cache data
+### DELETE cache data
 
 curl -i -X DELETE http://localhost:8080/XYZTravels/flight/delete?flightId=JET001
 
@@ -69,7 +71,7 @@ curl -i -X DELETE http://localhost:8080/XYZTravels/airline/delete?airline=Jet%20
 curl -i -X DELETE http://localhost:8080/XYZTravels/city/delete?city=Chennai
 
 
-###GET /searchFlights?fromCity={fromCity}&toCity={toCity}&departureDate={departureDate}&returnDate={returndate}&oneWayPrice={price}&airline={airline}
+### GET /searchFlights?fromCity={fromCity}&toCity={toCity}&departureDate={departureDate}&returnDate={returndate}&oneWayPrice={price}&airline={airline}
 -   fromCity - departure city
 -   toCity - arrival city
 -   departureDate - departure date in yyyyMMdd format
@@ -79,7 +81,7 @@ curl -i -X DELETE http://localhost:8080/XYZTravels/city/delete?city=Chennai
 
 Returns all combination of forward and return flights and also shows journey time, number of stops, price and commutes.
 
-###One way flight search 
+### One way flight search 
 http://localhost:8080/XYZTravels/searchFlights?fromCity=Hyderabad&toCity=New%20Delhi&departureDate=20180725&oneWayPrice=7200
 
 {
@@ -132,7 +134,7 @@ http://localhost:8080/XYZTravels/searchFlights?fromCity=Hyderabad&toCity=New%20D
   ]
 }
 
-###Both way flight search 
+### Both way flight search 
 http://localhost:8080/XYZTravels/searchFlights?fromCity=Hyderabad&toCity=New%20Delhi&departureDate=20180725&returnDate=20180728&oneWayPrice=7200
 
 {
@@ -240,7 +242,7 @@ http://localhost:8080/XYZTravels/searchFlights?fromCity=Hyderabad&toCity=New%20D
 }
 
 
-###GET /searchRoundTripFlights?fromCity={fromCity}&toCity={toCity}&departureDate={departureDate}&returnDate={returndate}
+### GET /searchRoundTripFlights?fromCity={fromCity}&toCity={toCity}&departureDate={departureDate}&returnDate={returndate}
 -   fromCity - departure city
 -   toCity - arrival city
 -   departureDate - departure date in yyyyMMdd format
@@ -248,7 +250,7 @@ http://localhost:8080/XYZTravels/searchFlights?fromCity=Hyderabad&toCity=New%20D
 
 Returns best combination of forward and return flights and also shows journey time, number of stops, price and commutes.
 
-###Round trip best flight combination search 
+### Round trip best flight combination search 
 http://localhost:8080/XYZTravels/searchRoundTripFlights?fromCity=Hyderabad&toCity=Mumbai&departureDate=20180725&returnDate=20180728
 
 [
