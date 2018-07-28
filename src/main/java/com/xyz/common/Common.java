@@ -23,23 +23,22 @@ public final class Common {
     	return sdf.parse(dateString);
     }
 
-    @SuppressWarnings("deprecation")
     public static Time getTimeDifference(Date startDate, Date endDate) {
     	long duration = endDate.getTime() - startDate.getTime();
     	long hours = TimeUnit.MILLISECONDS.toHours(duration);
     	duration -= TimeUnit.HOURS.toMillis(hours);
     	long minutes = TimeUnit.MILLISECONDS.toMinutes(duration);
 
-    	return new Time((int)hours, (int)minutes, 0);
+    	return Time.valueOf(hours + ":" + minutes + ":" + "00");
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public static Map convertSelectMap(Map<Object, Object> selectMap, String columnName) {
-    	Map newMap = new HashMap<>();
+    @SuppressWarnings("rawtypes")
+	public static Map convertSelectMap(Map<Object, Object> selectMap, String columnName) {
+    	Map<Object, Object> newMap = new HashMap<>();
 
     	if(selectMap != null) {
     		for(Map.Entry<Object, Object> entry : selectMap.entrySet()) {
-    			newMap.put(entry.getKey(), ((Map)entry.getValue()).get(columnName));
+    			newMap.put(entry.getKey(), ((Map<?, ?>)entry.getValue()).get(columnName));
     		}
     		return newMap;
     	}
